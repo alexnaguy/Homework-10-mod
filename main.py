@@ -124,3 +124,41 @@ class ExpressionConverter:
             result_str += " " + stack.pop()
         return result_str
 
+class Expression:
+
+    def __init__(self, expression):
+        self.__infix_expression = expression
+        self.__postfix_expression = ExpressionConverter.to_postfix(expression)
+
+    @property
+    def infix_expression(self):
+        return self.__infix_expression
+
+    @property
+    def postfix_expression(self):
+        return self.__postfix_expression
+
+    def get_expression_value(self):
+        '''
+        Возвращает значение выражения, записанного в постфиксной форме в поле __postfix_expression
+        :return:
+        '''
+
+        stack = Stack()
+        for symbol in self.postfix_expression:
+            if symbol.isdigit():
+                stack.push(symbol)
+
+            elif symbol in "+-*/":
+                a = int(stack.pop())
+                b = int(stack.pop())
+                if symbol == "+":
+                    stack.push(b + a)
+                elif symbol == "-":
+                    stack.push(b - a)
+                elif symbol == "*":
+                    stack.push(b * a)
+                else:
+                    stack.push(b / a)
+
+        return stack.pop()
