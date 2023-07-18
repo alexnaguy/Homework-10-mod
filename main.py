@@ -72,3 +72,55 @@ class ExpressionConverter:
         if stack.is_empty():
             return True
         return False
+
+
+    @staticmethod
+    def to_postfix(expression: str) -> list:
+        """
+        Вощзвращает  выражение в постфиксной форме записи
+
+        :param expression: str
+        :return:
+                list
+        """
+        result_str = ""
+        stack = Stack()
+        check_brackets = ExpressionConverter.__check_brackets(expression)
+        if check_brackets:
+            expression = ExpressionConverter.__normalize_infix_expression(expression)
+            expression = ExpressionConverter.__add_space_expression(expression)
+            operation_value = ExpressionConverter.operation_priority
+        else:
+            raise BracketError(f"Не корректно расставлены скобки: {expression}.")
+        for symbol in expression:
+            # 1.1
+            if symbol.isdigit():
+                result_str += symbol
+            # 1.2
+            elif symbol == "(":
+                stack.push(symbol)
+            # 1.3
+            elif symbol == ")":
+                while stack.peek() != "(":
+                    result_str += " " + stack.peek()
+                    stack.pop()
+                stack.pop()
+            elif symbol == " ":
+                result_str += symbol
+            # 1.4
+            elif symbol in "+-*/":
+                if len(stack) == 0:
+                    stack.push(symbol)
+                elif not stack.is_empty() and operation_value[symbol] <= operation_value[stack.peek()]:
+                    while not stack.is_empty() and operation_value[stack.peek()] >= operation_value[symbol]:
+                        result_str += " " + stack.peek()
+                        stack.pop()
+                    stack.push(symbol)
+                else:
+                    stack.push(symbol)
+
+        # 2
+        while len(stack) != 0:
+            result_str += " " + stack.pop()
+        return result_str
+
