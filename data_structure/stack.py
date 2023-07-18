@@ -21,3 +21,4 @@ class Stack:
 
     def is_empty(self):
         return len(self.__data) == 0
+

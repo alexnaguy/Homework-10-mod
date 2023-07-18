@@ -162,3 +162,19 @@ class Expression:
                     stack.push(b / a)
 
         return stack.pop()
+
+def execute_application():
+    try:
+        infix = "4 + (7 - 2 ) * 5 + (-3)"
+        expression1 = Expression(infix)
+        res = expression1.postfix_expression
+
+        res2 = expression1.get_expression_value()
+        print(f"В результате варажение {infix} в постфиксной форме выглядит: {res}")
+        print(f"Результат выражения равен: {res2}")
+    except BracketError as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    execute_application()
