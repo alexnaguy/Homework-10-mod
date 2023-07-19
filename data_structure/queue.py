@@ -19,10 +19,15 @@ class Queue:
         self.__data.add_first(item)
         return item
 
-    def __len__(self):
+    def count(self):
         """ возврат количества элементов в очереди """
         return len(self.__data)
 
     def is_empty(self):
-        """ ПРоверка очереди на пустоту """
+        """ Проверка очереди на пустоту """
         return len(self.__data) == 0
+
+    def displayss(self):
+        """  """
+        return self.__data.items_show()
+
