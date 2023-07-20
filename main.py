@@ -1,9 +1,16 @@
 from data_structure.queue import Queue
-# Пример использования
+from data_structure.linked_list import LinkedList
 
+
+
+
+
+
+# Пример использования
+max_size = 3
 queue = Queue()
 #size = int(input("Введите размер очереди: "))
-size = 2
+
 while True:
     print("\nМеню:")
     print("1. Добавить пользователя в очередь")
@@ -15,17 +22,20 @@ while True:
 
 
 
-    choice = int(input("Укажите операцию: "))
+    choice = int(input("Выберите действие: "))
 
     if choice == 1:
         login = input("Введите логин пользователя: ")
         password = input("Введите пароль пользователя: ")
         user = {login: password}
-        if queue.count() <= size:
+        count_queu = queue.count()
+
+        if count_queu >= max_size:
+            print("Очередь переполнена. Пользователь не может быть добавлен!")
+        else:
             queue.enqueue(user)
             print("Пользователь добавлен в очередь")
-        else:
-            print("Очередь переполнена")
+
 
 
     elif choice == 2:
@@ -45,8 +55,7 @@ while True:
 
     elif choice == 5:
         print("Пользователи в очереди:")
-        r = queue.displayss()
-        print(r)
+        print(queue.show_items())
 
     elif choice == 6:
         break

@@ -80,3 +80,9 @@ class LinkedList:
             while current_node.link is not None:
                 current_node = current_node.link
                 yield current_node.data
+
+    def display(self):
+        current_node = self.__head
+        while current_node:
+            print(current_node.data)
+            current_node = current_node.link

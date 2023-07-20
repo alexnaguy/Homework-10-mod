@@ -3,7 +3,12 @@ from data_structure.linked_list import LinkedList
 
 class Queue:
     def __init__(self):
+        #self.__max_size = max_size
         self.__data = LinkedList()
+
+
+
+
 
     def enqueue(self, item):
         """ Добавление нового элемента item в очередь """
@@ -27,7 +32,8 @@ class Queue:
         """ Проверка очереди на пустоту """
         return len(self.__data) == 0
 
-    def displayss(self):
-        """  """
-        return self.__data.items_show()
+    def show_items(self):
+        """ Выводит все элементы в очереди  """
+        #return self.__data.items_show()
+        return self.__data.display()
 
