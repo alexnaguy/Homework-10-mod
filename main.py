@@ -53,3 +53,27 @@ class Navigator:
 
     def build_route(self,start: Point, finish: Point):
         return self.strategy.build_route(start,finish)
+
+
+def execute_application():
+
+    st = Point(1, 9)
+    fin = Point(52,64)
+    navigator = Navigator()
+    walk = WalkingStrategy()
+    car = DriveStrategy()
+    tran = Transport()
+
+    navigator.set_strategy(car)
+    print(navigator.build_route(st, fin))
+
+    navigator.set_strategy(walk)
+    print(navigator.build_route(st, fin))
+
+    navigator.set_strategy(tran)
+    print(navigator.build_route(st, fin))
+
+
+
+if __name__ == "__main__":
+    execute_application()
